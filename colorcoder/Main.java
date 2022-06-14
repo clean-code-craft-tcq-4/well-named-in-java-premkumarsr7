@@ -4,7 +4,7 @@ import colorcoder.enums.MajorColor;
 import colorcoder.enums.MinorColor;
 import colorcoder.test.TestColorPair;
 
-public class MajorMinorColor {
+public class Main {
 
   private static final String[] MAJOR_COLOR_NAMES = { "White", "Red", "Black", "Yellow", "Violet" };
   private static final int NUMBER_OF_MAJOR_COLORS = MAJOR_COLOR_NAMES.length;

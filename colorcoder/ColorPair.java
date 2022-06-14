@@ -32,8 +32,8 @@ public class ColorPair {
    */
   @Override
   public String toString() {
-    String[] majorColorPairArr = MajorMinorColor.getMajorcolornames();
-    String[] minorColorPairArr = MajorMinorColor.getMinorcolornames();
+    String[] majorColorPairArr = Main.getMajorcolornames();
+    String[] minorColorPairArr = Main.getMinorcolornames();
     return majorColorPairArr[this.majorColor.getIndex()] + " " + minorColorPairArr[this.minorColor.getIndex()];
   }
-};
+}

@@ -4,7 +4,7 @@
 package colorcoder.test;
 
 import colorcoder.ColorPair;
-import colorcoder.MajorMinorColor;
+import colorcoder.Main;
 import colorcoder.enums.MajorColor;
 import colorcoder.enums.MinorColor;
 
@@ -15,14 +15,14 @@ public class TestColorPair {
 
   public static void testNumberToPair(final int pairNumber, final MajorColor expectedMajor,
       final MinorColor expectedMinor) {
-    ColorPair colorPair = MajorMinorColor.getColorFromPairNumber(pairNumber);
+    ColorPair colorPair = Main.getColorFromPairNumber(pairNumber);
     System.out.println("Got pair " + colorPair.toString());
     assert (colorPair.getMajor() == expectedMajor);
     assert (colorPair.getMinor() == expectedMinor);
   }
 
   public static void testPairToNumber(final MajorColor major, final MinorColor minor, final int expectedPairNumber) {
-    int pairNumber = MajorMinorColor.getPairNumberFromColor(major, minor);
+    int pairNumber = Main.getPairNumberFromColor(major, minor);
     System.out.println("Got pair number " + pairNumber);
     assert (pairNumber == expectedPairNumber);
   }
