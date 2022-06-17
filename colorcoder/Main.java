@@ -29,6 +29,8 @@ public class Main {
 
     TestColorPair.testPairToNumber(MajorColor.BLACK, MinorColor.ORANGE, 12);
     TestColorPair.testPairToNumber(MajorColor.VIOLET, MinorColor.SLATE, 25);
+
+    TestColorPair.printAllColorCodes();
   }
 
   /**

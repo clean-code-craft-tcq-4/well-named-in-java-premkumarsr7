@@ -26,4 +26,13 @@ public class TestColorPair {
     System.out.println("Got pair number " + pairNumber);
     assert (pairNumber == expectedPairNumber);
   }
+
+  public static void printAllColorCodes() {
+    for (MajorColor majorColor : MajorColor.values()) {
+      for (MinorColor minorColor : MinorColor.values()) {
+        System.out.println("Color Pair : " + majorColor + "-" + minorColor + ", Color code : " +
+            Main.getPairNumberFromColor(majorColor, minorColor));
+      }
+    }
+  }
 }
