@@ -1,120 +1,49 @@
 package colorcoder;
 
+import colorcoder.enums.MajorColor;
+import colorcoder.enums.MinorColor;
+import colorcoder.test.TestColorPair;
+
 public class Main {
-    enum MajorColor {
-        WHITE(0),
-        RED(1),
-        BLACK(2),
-        YELLOW(3),
-        VIOLET(4);
-        private int index;
-        private MajorColor(int index) {
-            this.index = index;
-        }
-        int getIndex() {
-            return index;
-        }
-        public static MajorColor fromIndex(int index) {
-            for(MajorColor color: MajorColor.values()) {
-                if(color.getIndex() == index) {
-                    return color;
-                }
-            }
-            return null;
-        }
-    };
-    enum MinorColor {
-        BLUE(0),
-        ORANGE(1),
-        GREEN(2),
-        BROWN(3),
-        SLATE(4);
-        private int index;
-        private MinorColor(int index) {
-            this.index = index;
-        }
-        int getIndex() {
-            return index;
-        }
-        public static MinorColor fromIndex(int index) {
-            for(MinorColor color: MinorColor.values()) {
-                if(color.getIndex() == index) {
-                    return color;
-                }
-            }
-            return null;
-        }
-    };
 
-    final static String MajorColorNames[] = {
-        "White", "Red", "Black", "Yellow", "Violet"
-    };
-    final static int numberOfMajorColors = MajorColorNames.length;
-    final static String MinorColorNames[] = {
-        "Blue", "Orange", "Green", "Brown", "Slate"
-    };
-    final static int numberOfMinorColors = MinorColorNames.length;
+  private static final String[] MAJOR_COLOR_NAMES = { "White", "Red", "Black", "Yellow", "Violet" };
+  private static final int NUMBER_OF_MAJOR_COLORS = MAJOR_COLOR_NAMES.length;
+  private static final String[] MINOR_COLOR_NAMES = { "Blue", "Orange", "Green", "Brown", "Slate" };
+  private static final int NUMBER_OF_MINOR_COLORS = MINOR_COLOR_NAMES.length;
 
-    static class ColorPair {
-        private MajorColor majorColor;
-        private MinorColor minorColor;
-        
-        public ColorPair(MajorColor major, MinorColor minor)
-        {
-            majorColor = major;
-            minorColor = minor;
-        }
-        public MajorColor getMajor() {
-            return majorColor;
-        }
-        public MinorColor getMinor() {
-            return minorColor;
-        }
-        String ToString() {
-            String colorPairStr = MajorColorNames[majorColor.getIndex()];
-            colorPairStr += " ";
-            colorPairStr += MinorColorNames[minorColor.getIndex()];
-            return colorPairStr;
-        }
-    };
+  public static ColorPair getColorFromPairNumber(final int pairNumber) {
+    int zeroBasedPairNumber = pairNumber - 1;
+    MajorColor majorColor = MajorColor.getMajorColorFromIndex(zeroBasedPairNumber / NUMBER_OF_MAJOR_COLORS);
+    MinorColor minorColor = MinorColor.getMinorColorFromIndex(zeroBasedPairNumber % NUMBER_OF_MINOR_COLORS);
+    return new ColorPair(majorColor, minorColor);
 
-    static ColorPair GetColorFromPairNumber(int pairNumber) {
-        int zeroBasedPairNumber = pairNumber - 1;
-        MajorColor majorColor = 
-            MajorColor.fromIndex(zeroBasedPairNumber / numberOfMinorColors);
-        MinorColor minorColor =
-            MinorColor.fromIndex(zeroBasedPairNumber % numberOfMinorColors);
-        return new ColorPair(majorColor, minorColor);
-    }
-    static int GetPairNumberFromColor(MajorColor major, MinorColor minor) {
-        return major.getIndex() * numberOfMinorColors + minor.getIndex() + 1;
-    }
+  }
 
-    static void testNumberToPair(int pairNumber,
-        MajorColor expectedMajor,
-        MinorColor expectedMinor)
-    {
-        ColorPair colorPair = GetColorFromPairNumber(pairNumber);
-        System.out.println("Got pair " + colorPair.ToString());
-        assert(colorPair.getMajor() == expectedMajor);
-        assert(colorPair.getMinor() == expectedMinor);
-    }
+  public static int getPairNumberFromColor(final MajorColor major, final MinorColor minor) {
+    return (major.getIndex() * NUMBER_OF_MINOR_COLORS) + minor.getIndex() + 1;
+  }
 
-    static void testPairToNumber(
-        MajorColor major,
-        MinorColor minor,
-        int expectedPairNumber)
-    {
-        int pairNumber = GetPairNumberFromColor(major, minor);
-        System.out.println("Got pair number " + pairNumber);
-        assert(pairNumber == expectedPairNumber);
-    }
+  public static void main(final String[] args) {
+    TestColorPair.testNumberToPair(4, MajorColor.WHITE, MinorColor.BROWN);
+    TestColorPair.testNumberToPair(5, MajorColor.WHITE, MinorColor.SLATE);
 
-    public static void main(String[] args) {
-        testNumberToPair(4, MajorColor.WHITE, MinorColor.BROWN);
-        testNumberToPair(5, MajorColor.WHITE, MinorColor.SLATE);
-    
-        testPairToNumber(MajorColor.BLACK, MinorColor.ORANGE, 12);
-        testPairToNumber(MajorColor.VIOLET, MinorColor.SLATE, 25);
-    }
+    TestColorPair.testPairToNumber(MajorColor.BLACK, MinorColor.ORANGE, 12);
+    TestColorPair.testPairToNumber(MajorColor.VIOLET, MinorColor.SLATE, 25);
+
+    TestColorPair.printAllColorCodes();
+  }
+
+  /**
+   * @return the majorcolornames
+   */
+  public static String[] getMajorcolornames() {
+    return MAJOR_COLOR_NAMES;
+  }
+
+  /**
+   * @return the minorcolornames
+   */
+  public static String[] getMinorcolornames() {
+    return MINOR_COLOR_NAMES;
+  }
 }
